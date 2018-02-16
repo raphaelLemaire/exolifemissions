@@ -1,20 +1,20 @@
-
-import numpy as np
 import cv2
+import numpy as np
 from matplotlib import pyplot as plt
 
-cv2.destroyAllWindows()
+img = cv2.imread('C:/Users/ASUS/Desktop/imagesexo/GD61.pbm', 0)
 
-img = cv2.imread('imagesexo/GD61.pbm',0)
-plt.hist(img.ravel(),256,[0,256], label = "STD");
-#Normalisation
-cv2.normalize(img, img, 255, 255, 1)
+isize = img.shape
+cv2.imshow('Image',img)
 
-cv2.imshow('Normalisation',img)
+histo = cv2.calcHist([img],[0],None,[256],[0,256])
+plt.hist(img.ravel(),256,[0,256])
+plt.title('Histogram')
 
-plt.hist(img.ravel(),256,[0,256], label = "Normalisation");
-plt.legend(loc = "upper right")
 plt.show()
+#normalisation
+norm = cv2.normalize(img,img,255,255,1)
+cv2.imshow('Normalize', norm)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
